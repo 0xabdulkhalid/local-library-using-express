@@ -28,7 +28,7 @@ AuthorSchema.virtual("url").get(function () {
   return `/catalog/author/${this._id}`;
 });
 
-AuthorSchema.virtual("date_details").get(function () {
+AuthorSchema.virtual("lifespan").get(function () {
   if (this.date_of_birth === undefined && this.date_of_death === undefined)
     return false;
   const dob = this.date_of_birth
