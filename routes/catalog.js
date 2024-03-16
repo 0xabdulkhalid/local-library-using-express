@@ -102,12 +102,6 @@ router.post(
   book_instance_controller.bookinstance_create_post
 );
 
-// GET request to delete BookInstance.
-router.get(
-  "/bookinstance/:id/delete",
-  book_instance_controller.bookinstance_delete_get
-);
-
 // POST request to delete BookInstance.
 router.post(
   "/bookinstance/:id/delete",
