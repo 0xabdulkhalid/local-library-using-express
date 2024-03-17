@@ -1,17 +1,19 @@
 extends layout 
 
 block content 
-    h1= title 
-    
-    .d-flex.justify-content-between
-        p #[strong Author: ]
-            a(href=book.author.url) #{book.author.name} 
-        p #[strong ISBN: ] #{book.isbn} 
-        p #[strong Genre: ]
-            each val, index in book.genre 
-                a(href=val.url) #{val.name} 
-                if index < book.genre.length - 1
-                    |,&nbsp;
+    h1 Confirm Deleting Book 
+
+    hr
+
+    p #[strong Title: ] #{title}
+    p #[strong Author: ]
+        a(href=book.author.url) #{book.author.name} 
+    p #[strong ISBN: ] #{book.isbn} 
+    p #[strong Genre: ]
+        each val, index in book.genre 
+            a(href=val.url) #{val.name} 
+            if index < book.genre.length - 1
+                |,&nbsp;
 
 
     if book_instances.length
@@ -33,7 +35,8 @@ block content
                 p #[strong Due back: ] #{val.due_back} 
             p #[strong ID: ]
                 a(href=val.url) #{val._id} 
-    else 
+    else
+        hr
         p Do you really want to delete this Book?
 
         form(method='POST')
