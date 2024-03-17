@@ -30,7 +30,7 @@ AuthorSchema.virtual("url").get(function () {
 
 AuthorSchema.virtual("lifespan").get(function () {
   if (this.date_of_birth === undefined && this.date_of_death === undefined)
-    return false;
+    return "";
   const dob = this.date_of_birth
     ? DateTime.fromJSDate(this.date_of_birth).toLocaleString(DateTime.DATE_MED)
     : "";
