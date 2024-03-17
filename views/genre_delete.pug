@@ -1,0 +1,23 @@
+extends layout 
+
+block content 
+    h1 Delete Genre: 
+        u= genre.name
+    
+    div(style="margin:20px 0 0 20px")
+        p #[strong Delete the following Books linked with Genre before attempting to delete the Genre itself.] 
+
+        h4 Books 
+        if genre_books.length 
+            ul 
+                each book in genre_books 
+                    li: a(href=book.url) #{book.title} 
+            
+            button.btn.btn-danger(disabled) Delete Genre
+        else
+            p Do you really want to delete this Genre?
+        
+            form(method='POST')
+                input#genreid.form-control(type='hidden' name='genreid' value=genre._id)
+                button.btn.btn-danger(type='submit') Delete Genre
+    
