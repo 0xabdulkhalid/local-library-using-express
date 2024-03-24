@@ -4,6 +4,7 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const compression = require("compression");
+const helmet = require("helmet");
 require("dotenv").config();
 
 const indexRouter = require("./routes/index");
@@ -25,7 +26,17 @@ async function main() {
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "pug");
 
+// Send responses as Compressed ones
 app.use(compression());
+
+// Only allows Bootstrap and Jquery to be served by setting CSP Headers
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      "script-src": ["'self'", "code.jquery.com", "cdn.jsdelivr.net"],
+    },
+  })
+);
 
 app.use(logger("dev"));
 app.use(express.json());
