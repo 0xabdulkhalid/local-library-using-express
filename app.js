@@ -5,13 +5,21 @@ const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const compression = require("compression");
 const helmet = require("helmet");
-require("dotenv").config();
 
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
 const catalogRouter = require("./routes/catalog");
+require("dotenv").config();
 
 const app = express();
+
+const RateLimit = require("express-rate-limit");
+const limiter = RateLimit({
+  windowMs: 1 * 60 * 1000, // 1 Minute
+  max: 15,
+});
+// Middleware applies rate limiter to all incoming requests
+app.use(limiter);
 
 const mongoose = require("mongoose");
 mongoose.set("strictQuery", false);
